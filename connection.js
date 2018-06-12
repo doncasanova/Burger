@@ -38,11 +38,11 @@ connection.connect(function (err) {
 // Use Handlebars to render the main index.html page with the movies in it.
 app.get("/", function (req, res) {
   console.log("hello world 2")
-  connection.query("SELECT * FROM burgers;", function (err, data) {
+  connection.query("SELECT * FROM burgers WHERE devoured = 0;", function (err, data) {
     if (err) {
       return res.status(500).end();
     }
-    console.log(data)
+    // console.log(data)
     res.render("index", { burgers: data });
     // res.render("index")
   });
@@ -62,44 +62,22 @@ app.post("/burgers", function (req, res) {
   });
 });
 
-// Retrieve all movies
-// app.get("/burgers", function (req, res) {
-//   connection.query("SELECT * FROM burgers;", function (err, data) {
-//     if (err) {
-//       return res.status(500).end();
-//     }
-
-//     res.json(data);
-//   });
-// });
-
-// Get a specific movie
-// app.get("/burgers/:id", function (req, res) {
-//   connection.query("SELECT * FROM burgers WHERE id = ?", [req.params.id], function (err, data) {
-//     if (err) {
-//       // If an error occurred, send a generic server failure
-//       return res.status(500).end();
-//     }
-
-//     res.json(data);
-
-//   });
-// });
-
 // // Update a burger
-// app.put("/burgers/:id", function (req, res) {
-//   connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [req.body.burger, req.params.id], function (err, result) {
-//     if (err) {
-//       // If an error occurred, send a generic server failure
-//       return res.status(500).end();
-//     }
-//     else if (result.changedRows === 0) {
-//       // If no rows were changed, then the ID must not exist, so 404
-//       return res.status(404).end();
-//     }
-//     res.status(200).end();
+app.put("/burgers/:id", function (req, res) {
+console.log("burger/:id route hit")
+  console.log(req.params.id)
+  // connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [req.body.burger, req.params.id], function (err, result) {
+  //   if (err) {
+  //     // If an error occurred, send a generic server failure
+  //     return res.status(500).end();
+  //   }
+  //   else if (result.changedRows === 0) {
+  //     // If no rows were changed, then the ID must not exist, so 404
+  //     return res.status(404).end();
+  //   }
+  //   res.status(200).end();
 
-//   });
+  });
 // });
 
 // // Delete a burger

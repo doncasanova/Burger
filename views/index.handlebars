@@ -27,7 +27,7 @@ that will submit the user input into the database. --}}
       <form id="addBurger" class="button-size">
         <textarea type="text" name="burger"></textarea>
         <br>
-        <button class= type="submit">Save Burger!</button>
+        <button class=t ype="submit">Save Burger!</button>
       </form>
     </div>
   </div>
@@ -53,26 +53,29 @@ that will submit the user input into the database. --}}
         location.reload();
       })
   });
-  
 
 
 
 
-  $(".devourBurger").on("submit", function (event) {
+
+  $(".devourBurger").on("click", function (event) {
+    console.log("your in devour")
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-    var idBurger = {
-      id: $("data-burgerid").val().trim()
-    };
-    // Send the POST request.
-    $.ajax("/burgers/:id", {
+   
+       var id = $("[data-burgerid=id]");
+      var devouredBurger = ($(this).data("burgerid"))
+      console.log(devouredBurger)
+
+        $.ajax("/burgers/:id", {
       type: "PUT",
-      data: idBurger
+      data: devouredBurger
     }).then(
       function () {
+        console.log("devoured burger");
         // Reload the page to get the updated list
         location.reload();
       })
-
+  });
 
 </script>

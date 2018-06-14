@@ -64,7 +64,8 @@ app.post("/burgers", function (req, res) {
 
 // // Update a burger
 app.put("/burgers/:id", function (req, res) {
-console.log("burger/:id route hit")
+
+  console.log("burger/:id route hit")
   console.log(req.params.id)
   // connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [req.body.burger, req.params.id], function (err, result) {
   //   if (err) {

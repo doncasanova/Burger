@@ -1,3 +1,4 @@
+
 var express = require("express");
 var bodyParser = require("body-parser");
 
@@ -36,3 +37,4 @@ connection.connect(function (err) {
 });
 
 module.exports = connection;
+module.exports = app;

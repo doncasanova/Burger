@@ -1,7 +1,7 @@
 {
   "name": "exercise3_day_planner",
   "version": "1.0.0",
-  "description": "",
+  "description": "Eat the burger! A MySQL, Node, Express, Handlebars restaurant app that lets the users input the name of burgers they'd like to eat.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,6 +13,8 @@
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.11",
+    "method-override": "^2.3.10",
     "mysql": "^2.10.2",
     "orm": "^5.0.0"
   }

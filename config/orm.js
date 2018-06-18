@@ -1,84 +1,91 @@
-
+// Import Node Dependencies
 var connection = require("./connection.js");
+console.log('in the orm')
+// // Connect to MySQL database
+// connection.connect(function (err) {
+//   if (err) {
+//     console.error('error connecting: ' + err.stack);
+//     return;
+//   };
+//   console.log('connected as id in orm ' + connection.threadId);
+// });
 
+// Methods for MySQL commands
 var orm = {
 
-  insertUnDevoured: function(tableInput, colToSearch, valOfCol) {
-    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
-    connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
-      if (err) throw err;
-      console.log(result);
+  selectAll: function (callback) {
+    var queryString = 'SELECT * FROM burgers';
+
+    // Run MySQL Query
+    connection.query(queryString, {
+      function(err, results) {
+        if (err) throw err;
+        callback(results);
+      }
     });
   },
 
-    // insertUnDevoured: function(tableInput, colToSearch, valOfCol) {
-    //     var queryString = "SELECT * FROM ?? WHERE ?? = ?" ;
-    //     connection.query(queryString, [tableInput, colToSearch, valOfCol], 
-    //     function (err, data) {
-    //       if (err) throw err;
-    //       console.log(data);
-         
-    //     });
-    // },
+  //InsertOne()
+  InsertOne: function (burger_name, callback) {
 
-  /**
-   * @param1 - column name (only support a single column)
-   * @param2 - table to select the column from
-  */
-  selectAll: function(whatToSelect, tableInput) {
-    var queryString = "SELECT ?? FROM ??";
-    connection.query(queryString, [whatToSelect, tableInput], function(err, result) {
+    // Create a new timestamp
+    //-----------------------------------
+    var d = new Date();
+    var timestamp = '' + d.getFullYear() + '-'; // must be string
+    var month = '' + (d.getMonth() + 1); // must be string
+    // handle 1 digit months
+    if (month.length == 1) {
+      month = '0' + month;
+    }
+    timestamp += month + '-';
+    var day = '' + d.getDate(); // must be string
+    // handle 1 digit day of month
+    if (day.length == 1) {
+      day = '0' + day;
+    }
+    timestamp += day + ' ';
+    var hour = '' + d.getHours(); // must be string
+    // handle 1 digit hour
+    if (hour.length == 1) {
+      hour = '0' + hour;
+    }
+    timestamp += hour + ':';
+    var minute = '' + d.getMinutes(); // must be string
+    // handle 1 digit minute
+    if (minute.length == 1) {
+      minute = '0' + minute;
+    }
+    timestamp += minute + ':';
+    var second = '' + d.getSeconds(); // must be string
+    // handle 1 digit second
+    if (second.length == 1) {
+      second = '0' + second;
+    }
+    timestamp += second;
+    // ----------------------------------------------------------
+
+    // Run MySQL Query
+    connection.query('INSERT INTO burgers SET ?', {
+      burger_name: burger_name,
+      devoured: false,
+      date: timestamp
+    }, function (err, result) {
       if (err) throw err;
-      console.log(result);
+      callback(result);
     });
+
   },
 
-  /**
-   * @param1 - table to select from
-   * @param2 - column to match
-   * @param3 - value to match
-   */
-  selectOne: function(tableInput, colToSearch, valOfCol) {
-    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+  //updateOne()
+  updateOne: function(burgerID, callback){
 
-    connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
+    // Run MySQL Query
+    connection.query('UPDATE burgers SET ? WHERE ?', [{devoured: true}, {id: burgerID}], function (err, results) {
       if (err) throw err;
-      console.log(result);
-    });
-  },
-
-  selectOne: function(tableInput, colToSearch, valOfCol) {
-    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
-
-    connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
-      if (err) throw err;
-      console.log(result);
-    });
-  },
-
-
-  /**
-   * @param1 - array of columns to select
-   * @param2 - table 1
-   * @param3 - table 2
-   * @param4 - table 1 column to
-   * @param5 - table 2 column to match on
-   */
-  leftJoin: function(whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol) {
-    var queryString = "SELECT ?? FROM ?? AS tOne";
-    queryString += " LEFT JOIN ?? AS tTwo";
-    queryString += " ON tOne.?? = tTwo.??";
-
-    console.log(queryString);
-
-    connection.query(queryString, [whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol], function(
-      err,
-      result
-    ) {
-      if (err) throw err;
-      console.log(result);
+      callback(results);
     });
   }
-};
+
+}
 
 module.exports = orm;

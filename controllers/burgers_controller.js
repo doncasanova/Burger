@@ -1,10 +1,44 @@
 
+//--------------------------------------------------------------
+console.log('in the burgers_controller')
 
+var express = require("express");
+var router = express.Router();
+var burgers = require("../models/burger.js");
 
+// create routes
+//---------------------------------
+// Index Redirect
+router.get('/', function (req, res) {
+  res.send('GET request to the homepage')
+  res.redirect('/');
+ 
+});
+// Sends to DOM
+router.get('/', function (req, res) {
+  res.send('GET request to the homepage')
+  burgers.selectAll(function (data) {
+    var hbsObject = { burgers: data };
+    res.render('/index', hbsObject);
+  });
+});
 
-// Inside the `burgers_controller.js` file, import the following:
+//Create a New Burger
+router.post('/burger/create', function (req, res) {
+  // res.send('POST request to the homepage')
+  burger.insertOne(req.body.burger_name, function () {
+    res.redirect('/index');
+  });
+});
 
-// Express
-// `burger.js`
+//Devour a Burger
+router.post('/burger/eat/:id', function (req, res) {
+  // res.send('POST request to the homepage')
+  burger.updateOne(req.params.id, function () {
+    res.redirect('/index');
+  });
+});
+//---------------------------------------------------
 
-// Create the `router` for the app, and export the `router` at the end of your file.
+//Export routes
+module.exports = router;

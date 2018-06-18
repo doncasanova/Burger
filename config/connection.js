@@ -1,40 +1,25 @@
-
-var express = require("express");
-var bodyParser = require("body-parser");
-
-var app = express();
-
-// Set the port of our application
-// process.env.PORT lets the port be set by Heroku
-var PORT = process.env.PORT || 8080;
-
-// Sets up the Express app to handle data parsing
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-var exphbs = require("express-handlebars");
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
+console.log('in the connection')
+// Node Dependency
 var mysql = require("mysql");
+var connection;
 
 var connection = mysql.createConnection({
-  host: "localhost",
   port: 3206,
+  host: "localhost",
   user: "root",
   password: "root",
-  database: "burgers_db",
+  database: "burgers_db"
 });
 
-connection.connect(function (err) {
+// Make connection.
+connection.connect(function(err) {
   if (err) {
     console.error("error connecting: " + err.stack);
     return;
   }
-
   console.log("connected as id " + connection.threadId);
 });
 
+// Export connection for our ORM to use.
 module.exports = connection;
-module.exports = app;
+

@@ -13,6 +13,7 @@ var burgers = {
     orm.selectAll(function (res) {
       callback(res);
     });
+    console.log('your in the selectAll model')
   },
 
   insertOne: function (burger_name, callback) {
@@ -29,8 +30,6 @@ var burgers = {
 
 // Export the database functions for the controller (catsController.js).
 module.exports = burgers;
-
-console.log(burgers)
 
 
 

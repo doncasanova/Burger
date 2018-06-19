@@ -1,6 +1,8 @@
 // Import Node Dependencies
 var connection = require("./connection.js");
 console.log('in the orm')
+
+
 // // Connect to MySQL database
 // connection.connect(function (err) {
 //   if (err) {
@@ -10,19 +12,21 @@ console.log('in the orm')
 //   console.log('connected as id in orm ' + connection.threadId);
 // });
 
+
 // Methods for MySQL commands
 var orm = {
 
   selectAll: function (callback) {
-    var queryString = 'SELECT * FROM burgers';
-
+    var queryString = 'SELECT * FROM burgers WHERE devoured = 0';
     // Run MySQL Query
     connection.query(queryString, {
       function(err, results) {
+        connection.release();
         if (err) throw err;
         callback(results);
       }
     });
+    console.log('your in the selectAll orm')
   },
 
   //InsertOne()

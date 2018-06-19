@@ -9,18 +9,21 @@ var burgers = require("../models/burger.js");
 // create routes
 //---------------------------------
 // Index Redirect
-router.get('/', function (req, res) {
-  res.send('GET request to the homepage')
-  res.redirect('/');
+// router.get('/', function (req, res) {
+//   res.send('GET request to the homepage 123')
+//   res.redirect('index');
  
-});
+// });
 // Sends to DOM
 router.get('/', function (req, res) {
-  res.send('GET request to the homepage')
+  res.send('GET request to the homepage 321')
+  
   burgers.selectAll(function (data) {
     var hbsObject = { burgers: data };
-    res.render('/index', hbsObject);
+    console.log(hbsObject);
+    res.send('index', hbsObject);
   });
+  console.log('your in the selectAll router')
 });
 
 //Create a New Burger

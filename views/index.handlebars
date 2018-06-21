@@ -1,41 +1,43 @@
  {{!-- Setup the `index.handlebars` to have the template that Handlebars can render onto. --}} {{!-- Create a button in `index.handlebars`
 that will submit the user input into the database. --}}
-<div class="container text-dark ">
-  <div class="row d-flex justify-content-center">
-    <div class="col text-center"> 
-      <h1>What kind of burger would you like</h1>
-    </div>
-  </div>
-</div>
+
 <div class="card bg-dark text-white">
-  <img class="card-img" src="https://s-media-cache-ak0.pinimg.com/736x/ae/8e/3c/ae8e3cdac86ece07bba297ba0a8100ca.jpg" alt="Card image">
+  <img class="card-img" src="https://s-media-cache-ak0.pinimg.com/736x/ae/8e/3c/ae8e3cdac86ece07bba297ba0a8100ca.jpg " alt="Card image">
   <div class="card-img-overlay">
+    <div class="container text-dark ">
+      <div class="row d-flex justify-content-center">
+        <div class="col text-center">
+          <h1>What kind of burger would you like</h1>
+          <h2>Add burger to menu</h2>
+        </div>
+      </div>
+    </div>
     <div class="row d-flex ">
-      <div class="col d-flex justify-content-start text-dark font-weight-bold font-italic">
+      <div class="col-3 d-flex justify-content-start text-dark font-weight-bold font-italic">
         <ul>
           {{#each burgers}}
           <li>
             <p>
-              <button data-burgerid="{{this.id}}" class="devourBurger btn btn-dark">Devour</button>
-              {{this.id}}.{{this.burger_name}}
+              <button data-burgerid="{{this.id}}" class="devourBurger btn btn-success">Devour</button>
+               <label class = " p-2 rounded bg-dark text-white placeholder="" disabled"> {{this.id}}.{{this.burger_name}}</label>
+             
             </p>
           </li>
           {{/each}}
         </ul>
       </div>
-      <div class="col d-flex justify-content-center">
-        <h2>Add burger to menu</h2>
-        <form id="addBurger" class="button-size">
-          <textarea type="text" name="burger"></textarea>
+      <div class="col-6 d-flex justify-content-center">
+        <form id="addBurger" class="button-size ">
+          <button class="btn btn-success btn-block" type="submit">Save Burger!</button>
           <br>
-          <button class=t ype="submit">Save Burger!</button>
+          <textarea type="text" name="burger" placeholder="Enter Burger Name"></textarea>
         </form>
       </div>
-      <div class="col container p-3 mb-2 text-dark d-flex justify-content-end">
+      <div class="col-3 container p-3 mb-2 text-white d-flex justify-content-end">
         <ul>
-          {{#each burgers: devoured = true}}
+          {{#each burgers}}
           <li>
-            <p> devoured {{this.id}}.{{this.burger_name}}</p>
+             <label class = " p-2 rounded bg-dark text-white  placeholder="" disabled"> devoured {{this.id}}.{{this.burger_name}}</label>
           </li>
           {{/each}}
         </ul>

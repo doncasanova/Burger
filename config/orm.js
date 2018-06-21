@@ -6,25 +6,23 @@ var orm = {
 
   selectAll: function (callback) {
     // Run MySQL Query
-    connection.query('SELECT * FROM burgers WHERE devoured = 0', 
-      function(err, data) {
-        // connection.release();
+    connection.query('SELECT * FROM burgers ',
+      function (err, data) {
+        // connection.release
         if (err) throw err;
         callback(data);
       });
-    
+
   },
 
   //InsertOne()
   insertOne: function (burger_name, callback) {
     // Run MySQL Query
-    console.log("yes    " + burger_name.name)
-    connection.query("INSERT INTO burgers (burger_name) VALUES (?)", [{
-      burger_name: burger_name},
-      {devoured: false}], function (err, data) {
-      if (err) throw err;
-      callback(data);
-    });
+    connection.query("INSERT INTO burgers (burger_name) VALUES (?)",
+      [burger_name], function (err, data) {
+        if (err) throw err;
+        callback(data);
+      });
 
   },
 

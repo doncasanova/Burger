@@ -16,16 +16,17 @@ that will submit the user input into the database. --}}
     <div class="row d-flex ">
       <div class="col-4 d-flex justify-content-start text-white font-weight-bold font-italic ">
         <ul>
-          <H3 class = "text-center">Burgers to Devour</H3>
-          {{#each burgers}}
+          <H3 class="text-center">Burgers to Devour</H3>
+          {{#each burgers}} {{#unless this.devoured}}
           <li>
             <p>
               <button data-burgerid="{{this.id}}" class="devourBurger btn btn-success">Devour</button>
-              <label class=" p-2 rounded bg-dark text-white placeholder=" " disabled"> {{this.id}}.{{this.burger_name}}</label>
+              <label class=" p-2 rounded bg-dark text-white placeholder=" " disabled"> 
+                {{this.burger_name}}</label>
 
             </p>
           </li>
-          {{/each}}
+          {{/unless}} {{/each}}
         </ul>
       </div>
       <div class="col-4 d-flex justify-content-center">
@@ -39,12 +40,12 @@ that will submit the user input into the database. --}}
 
         <ul>
           <H3>Devoured Burgers</H3>
-          {{#each burgers}}
+          {{#each burgers}} {{#if this.devoured}}
           <li>
             <label class=" p-2 rounded bg-dark text-white  placeholder=" " disabled">
               {{this.burger_name}}</label>
           </li>
-          {{/each}}
+          {{/if}} {{/each}}
         </ul>
       </div>
     </div>

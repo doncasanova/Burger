@@ -2,11 +2,11 @@
 
 USE burgers_db;
 
-INSERT INTO burgers ( burger_name, devoured )
-VALUES ("California burger", 0 );
+INSERT INTO burgers ( burger_name)
+VALUES ("California burger");
 
-INSERT INTO burgers ( burger_name, devoured )
-VALUES ("Cheese burger", 0 );
+INSERT INTO burgers ( burger_name)
+VALUES ("Cheese burger");
 
-INSERT INTO burgers ( burger_name, devoured )
-VALUES ("Build your own burger", 0 );
+INSERT INTO burgers ( burger_name)
+VALUES ("Build your own burger");

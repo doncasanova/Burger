@@ -15,19 +15,16 @@ router.get('/', function (req, res) {
 
 //Create a New Burger
 router.post('/burger/create', function (req, res) {
-
-  console.log("hello" + req.body.insertId)
-  burgers.insertOne(req.body, function () {
+  burgers.insertOne(req.body.burger, function (result) {
   //    // Send back the ID of the new burger
-     res.json({ id: req.insertId });
-     console.log({ id: req.insertId });
+     res.redirect("/");
   });
 });
 
 //Devour a Burger
 router.put('/burger/eat/:id', function (req, res) {
   burgers.updateOne(req.params.id, function () {
-    res.json();
+    res.redirect("/");
   });
 });
 //---------------------------------------------------

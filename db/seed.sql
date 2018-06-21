@@ -3,10 +3,10 @@
 USE burgers_db;
 
 INSERT INTO burgers ( burger_name, devoured )
-VALUES ("California burger", 1 );
+VALUES ("California burger", 0 );
 
 INSERT INTO burgers ( burger_name, devoured )
-VALUES ("Cheese burger", 1 );
+VALUES ("Cheese burger", 0 );
 
 INSERT INTO burgers ( burger_name, devoured )
-VALUES ("Build your own burger", 1 );
+VALUES ("Build your own burger", 0 );

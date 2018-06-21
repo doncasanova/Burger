@@ -1,44 +1,33 @@
 
 //--------------------------------------------------------------
-console.log('in the burgers_controller')
-
 var express = require("express");
 var router = express.Router();
 var burgers = require("../models/burger.js");
-
 // create routes
 //---------------------------------
-// Index Redirect
-// router.get('/', function (req, res) {
-//   res.send('GET request to the homepage 123')
-//   res.redirect('index');
- 
-// });
+
 // Sends to DOM
 router.get('/', function (req, res) {
-  res.send('GET request to the homepage 321')
-  
   burgers.selectAll(function (data) {
-    var hbsObject = { burgers: data };
-    console.log(hbsObject);
-    res.send('index', hbsObject);
+    res.render('index', { burgers: data });
   });
-  console.log('your in the selectAll router')
 });
 
 //Create a New Burger
 router.post('/burger/create', function (req, res) {
-  // res.send('POST request to the homepage')
-  burger.insertOne(req.body.burger_name, function () {
-    res.redirect('/index');
+
+  console.log("hello" + req.body.insertId)
+  burgers.insertOne(req.body, function () {
+  //    // Send back the ID of the new burger
+     res.json({ id: req.insertId });
+     console.log({ id: req.insertId });
   });
 });
 
 //Devour a Burger
-router.post('/burger/eat/:id', function (req, res) {
-  // res.send('POST request to the homepage')
-  burger.updateOne(req.params.id, function () {
-    res.redirect('/index');
+router.put('/burger/eat/:id', function (req, res) {
+  burgers.updateOne(req.params.id, function () {
+    res.json();
   });
 });
 //---------------------------------------------------

@@ -1,40 +1,50 @@
  {{!-- Setup the `index.handlebars` to have the template that Handlebars can render onto. --}} {{!-- Create a button in `index.handlebars`
 that will submit the user input into the database. --}}
-<div class="container border border-dark rounded bg-dark text-white ">
+<div class="container text-dark ">
   <div class="row d-flex justify-content-center">
-    <div class="col-12 text-center">
+    <div class="col text-center"> 
       <h1>What kind of burger would you like</h1>
     </div>
   </div>
 </div>
-
-<div class="container p-3 mb-2 bg-primary text-white">
-  <div class="row d-flex ">
-    <div class="col-4">
-      <ul>
-        {{#each burgers}}
-        <li>
-          <p>
-            <button data-burgerid="{{this.id}}" class="devourBurger">Devour</button>
-            {{this.id}}.{{this.burger_name}}
-          </p>
-        </li>
-        {{/each}}
-      </ul>
-    </div>
-    <div class="col-5">
-      <h2>Add burger to menu</h2>
-      <form id="addBurger" class="button-size">
-        <textarea type="text" name="burger"></textarea>
-        <br>
-        <button class=t ype="submit">Save Burger!</button>
-      </form>
+<div class="card bg-dark text-white">
+  <img class="card-img" src="https://s-media-cache-ak0.pinimg.com/736x/ae/8e/3c/ae8e3cdac86ece07bba297ba0a8100ca.jpg" alt="Card image">
+  <div class="card-img-overlay">
+    <div class="row d-flex ">
+      <div class="col d-flex justify-content-start text-dark font-weight-bold font-italic">
+        <ul>
+          {{#each burgers}}
+          <li>
+            <p>
+              <button data-burgerid="{{this.id}}" class="devourBurger btn btn-dark">Devour</button>
+              {{this.id}}.{{this.burger_name}}
+            </p>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <h2>Add burger to menu</h2>
+        <form id="addBurger" class="button-size">
+          <textarea type="text" name="burger"></textarea>
+          <br>
+          <button class=t ype="submit">Save Burger!</button>
+        </form>
+      </div>
+      <div class="col container p-3 mb-2 text-dark d-flex justify-content-end">
+        <ul>
+          {{#each burgers: devoured = true}}
+          <li>
+            <p> devoured {{this.id}}.{{this.burger_name}}</p>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
-console.log('in index html')
 
   $("#addBurger").on("submit", function (event) {
     // Make sure to preventDefault on a submit event.
@@ -43,14 +53,14 @@ console.log('in index html')
       burger: $("#addBurger [name=burger]").val().trim()
     };
     // Send the POST request.
-    $.ajax("/burgers", {
+    $.ajax("/burger/create", {
       type: "POST",
       data: newBurger
     }).then(
       function () {
-        console.log("added new burger");
         // Reload the page to get the updated list
         location.reload();
+        console.log("added new burger");
       })
   });
 
@@ -62,13 +72,12 @@ console.log('in index html')
     console.log("your in devour")
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-   
-       var id = $("[data-burgerid=id]");
-      var devouredBurger = ($(this).data("burgerid"))
-      console.log(devouredBurger)
 
-        $.ajax("/burgers/:id", {
-      type: "PUT",
+    var id = $("[data-burgerid=id]");
+    var devouredBurger = ($(this).data("burgerid"))
+
+    $.ajax("/burger/eat/" + devouredBurger, {
+      type: "Put",
       data: devouredBurger
     }).then(
       function () {

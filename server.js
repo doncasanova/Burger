@@ -8,7 +8,7 @@ var app = express();
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
-app.use(express.static("view"));
+// app.use(express.static("view"));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));

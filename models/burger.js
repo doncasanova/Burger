@@ -1,6 +1,5 @@
 
-//------------------------------------------------------------------------
-console.log('in the burger')
+//-----------------------------------------------------------------------
 
 // Node Dependency
 var orm = require("../config/orm.js");
@@ -13,7 +12,6 @@ var burgers = {
     orm.selectAll(function (res) {
       callback(res);
     });
-    console.log('your in the selectAll model')
   },
 
   insertOne: function (burger_name, callback) {
@@ -22,7 +20,7 @@ var burgers = {
     });
   },
   updateOne: function (burger_id, callback) {
-    orm.update(burger_id, function (res) {
+    orm.updateOne(burger_id, function (res) {
       callback(res);
     });
   }

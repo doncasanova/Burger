@@ -4,8 +4,8 @@
   "description": "Eat the burger! A MySQL, Node, Express, Handlebars restaurant app that lets the users input the name of burgers they'd like to eat.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  
   },
   "author": "",
   "license": "ISC",

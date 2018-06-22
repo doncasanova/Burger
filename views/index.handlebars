@@ -68,16 +68,11 @@ that will submit the user input into the database. --}}
       function () {
         // Reload the page to get the updated list
         location.reload();
-        console.log("added new burger");
       })
   });
 
 
-
-
-
   $(".devourBurger").on("click", function (event) {
-    console.log("your in devour")
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
@@ -89,7 +84,6 @@ that will submit the user input into the database. --}}
       data: devouredBurger
     }).then(
       function () {
-        console.log("devoured burger");
         // Reload the page to get the updated list
         location.reload();
       })

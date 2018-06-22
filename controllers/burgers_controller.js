@@ -7,7 +7,7 @@ var burgers = require("../models/burger.js");
 //---------------------------------
 
 // Sends to DOM
-router.get('/', function (req, res) {
+router.get("/", function (req, res) {
   burgers.selectAll(function (data) {
     res.render('index', { burgers: data });
   });
@@ -15,8 +15,7 @@ router.get('/', function (req, res) {
 
 //Create a New Burger
 router.post('/burger/create', function (req, res) {
-  burgers.insertOne(req.body.burger, function (result) {
-  //    // Send back the ID of the new burger
+  burgers.insertOne(req.body.burger, function () {
      res.redirect("/");
   });
 });
@@ -24,7 +23,7 @@ router.post('/burger/create', function (req, res) {
 //Devour a Burger
 router.put('/burger/eat/:id', function (req, res) {
   burgers.updateOne(req.params.id, function () {
-    res.redirect("/");
+    res.render('index');
   });
 });
 //---------------------------------------------------
